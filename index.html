@@ -1,91 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Nexus Form</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial;
+:root {
+  --primary: #7223e6;
+  --primary-dark: #5a1ab8;
+  --primary-light: #f0e8ff;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --bg: #f4f0ff;
+  --card: #ffffff;
+  --text: #1e1b2e;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --radius: 14px;
 }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f1f5f9;
-    padding:20px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.form-box{
-    width:400px;
-    background:#fff;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
-    text-align:center;
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(114,35,230,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(114,35,230,0.08) 0%, transparent 60%);
+  padding: 24px;
+  font-family: 'Cairo', sans-serif;
 }
 
-img{
-    width:140px;
-    margin-bottom:15px;
+.form-box {
+  width: 100%;
+  max-width: 440px;
+  background: var(--card);
+  padding: 36px 30px;
+  border-radius: 24px;
+  box-shadow:
+    0 4px 6px rgba(114,35,230,0.06),
+    0 20px 40px rgba(114,35,230,0.12);
+  text-align: center;
+  animation: fadeUp 0.5s ease both;
 }
 
-h2{
-    margin-bottom:20px;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-input{
-    width:100%;
-    padding:12px;
-    margin-bottom:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    text-align:center;
-    outline:none;
+.logo-wrap {
+  margin-bottom: 18px;
 }
 
-button{
-    width:100%;
-    padding:12px;
-    border:none;
-    background:#7223e6;
-    color:#fff;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
-    transition:0.3s;
+.logo-wrap img {
+  width: 120px;
+  border-radius: 16px;
 }
 
-button:hover{
-    background:#0056b3;
+h2 {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
 }
 
-#successMessage{
-    display:none;
-    margin-top:20px;
-    color:green;
-    font-size:18px;
-    font-weight:bold;
+.subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
 }
 
-h3{
-    padding-bottom:15px;
-    color:red;
+/* ── Inputs ── */
+.field {
+  position: relative;
+  margin-bottom: 12px;
+  text-align: right;
 }
 
-.loading{
-    display:none;
-    margin-top:10px;
-    color:#555;
+.field input[type="text"],
+.field input[type="tel"] {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  text-align: right;
+}
+
+.field input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(114,35,230,0.1);
+  background: #fff;
+}
+
+/* ── Payment Info ── */
+.payment-box {
+  background: var(--primary-light);
+  border: 1.5px solid rgba(114,35,230,0.2);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 18px 0;
+  text-align: right;
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 2;
+}
+
+.payment-box .pay-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--primary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.payment-box a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+  direction: ltr;
+  display: inline-block;
+}
+
+.payment-box a:hover {
+  text-decoration: underline;
+}
+
+.pay-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.pay-row span {
+  font-weight: 600;
+}
+
+/* ── File Upload ── */
+.file-label {
+  display: block;
+  width: 100%;
+  padding: 32px 16px;
+  border: 2px dashed rgba(114,35,230,0.35);
+  border-radius: var(--radius);
+  background: var(--primary-light);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.file-label:hover {
+  border-color: var(--primary);
+  background: #ede0ff;
+}
+
+.file-label .upload-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.file-label .upload-text {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.file-label .upload-hint {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+#fileInput {
+  display: none;
+}
+
+#fileName {
+  font-size: 12px;
+  color: var(--success);
+  font-weight: 600;
+  min-height: 18px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* ── Warning ── */
+.warning {
+  font-size: 12.5px;
+  color: var(--danger);
+  font-weight: 700;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* ── Button ── */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  font-family: 'Cairo', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(114,35,230,0.35);
+}
+
+button[type="submit"]:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 6px 20px rgba(114,35,230,0.45);
+}
+
+button[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Loading ── */
+.loading {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid #e5e7eb;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Success ── */
+#successMessage {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0 10px;
+  animation: fadeUp 0.4s ease both;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+#successMessage h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--success);
+}
+
+#successMessage p {
+  font-size: 13.5px;
+  color: var(--muted);
 }
 
 </style>
@@ -95,114 +313,144 @@ h3{
 
 <div class="form-box">
 
-    <img src="./images/IMG_6217.png" alt="Logo">
+  <div class="logo-wrap">
+    <img src="./images/IMG_6217.png" alt="Nexus Logo">
+  </div>
 
-    <h2>Welcome To Nexus</h2>
+  <h2>Welcome To Nexus</h2>
+  <p class="subtitle">سجّل بياناتك لإتمام حجزك</p>
 
-    <form id="contactForm" enctype="multipart/form-data">
+  <form id="contactForm" enctype="multipart/form-data">
 
-        <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="New Nexus Submission">
 
-        <input type="hidden" name="_subject" value="New Nexus Submission">
-
-        <input 
-            type="text" 
-            name="name" 
-            placeholder="Full Name"
-            required
-        >
-
-        <input 
-            type="text" 
-            name="faculty" 
-            placeholder="Faculty"
-            required
-        >
-
-        <input 
-            type="text" 
-            name="university" 
-            placeholder="University"
-            required
-        >
-
-        <input 
-            type="text" 
-            name="phone" 
-            placeholder="Phone Number"
-            required
-        >
-
-        <p>
-            💳 لإتمام الحجز، برجاء تحويل EGP على :
-        </p>
-
-        <br>
-
-        ✔️Vodafone Cash:
-        <a href="tel:01025900424">
-            01025900424
-        </a>
-
-        <br>
-
-        ✔️ InstaPay:
-        <a href="tel:01558009747">
-            01558009747
-        </a>
-
-        <br><br>
-
-        بعد التحويل، قم برفع صورة واضحة للتحويل في الخانة التالية لتأكيد الحجز.
-
-        <br><br>
-
-        <input 
-            type="file" 
-            name="attachment" 
-            accept="image/*"
-            required
-        >
-
-        <h3>
-            ⚠️ لن يتم تأكيد الحجز بدون صورة التحويل
-        </h3>
-
-        <button type="submit">
-            Send
-        </button>
-
-    </form>
-
-    <div class="loading" id="loading">
-        جاري الإرسال...
+    <div class="field">
+      <input type="text" name="name" placeholder="الاسم بالكامل" required>
     </div>
 
-    <div id="successMessage">
-        ✅ تم إرسال البيانات بنجاح
+    <div class="field">
+      <input type="text" name="faculty" placeholder="الكلية" required>
     </div>
+
+    <div class="field">
+      <input type="text" name="university" placeholder="الجامعة" required>
+    </div>
+
+    <div class="field">
+      <input type="tel" name="phone" placeholder="رقم الهاتف" required>
+    </div>
+
+    <!-- Payment Info -->
+    <div class="payment-box">
+      <span class="pay-title">💳 لإتمام الحجز، برجاء تحويل المبلغ على:</span>
+      <div class="pay-row">
+        <span>✔️ Vodafone Cash:</span>
+        <a href="tel:01025900424">01025900424</a>
+      </div>
+      <div class="pay-row">
+        <span>✔️ InstaPay:</span>
+        <a href="tel:01558009747">01558009747</a>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--text); margin-bottom:12px; font-weight:600;">
+      بعد التحويل، ارفع صورة واضحة لإيصال التحويل لتأكيد الحجز
+    </p>
+
+    <!-- File Upload -->
+    <label class="file-label" for="fileInput">
+      <span class="upload-icon">📎</span>
+      <span class="upload-text">اضغط لرفع صورة التحويل</span>
+      <span class="upload-hint">JPG, PNG, HEIC — حجم أقصى 5MB</span>
+    </label>
+    <input type="file" id="fileInput" name="attachment" accept="image/*" required>
+    <div id="fileName"></div>
+
+    <div class="warning">
+      ⚠️ لن يتم تأكيد الحجز بدون صورة التحويل
+    </div>
+
+    <button type="submit" id="submitBtn">إرسال البيانات</button>
+
+  </form>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    جاري الإرسال...
+  </div>
+
+  <div id="successMessage">
+    <div class="success-icon">✅</div>
+    <h3>تم الإرسال بنجاح!</h3>
+    <p>استلمنا بياناتك وسيتم التواصل معك قريباً</p>
+  </div>
 
 </div>
 
 <script>
 
+// Show selected file name
+document.getElementById("fileInput").addEventListener("change", function () {
+  const nameEl = document.getElementById("fileName");
+  if (this.files && this.files[0]) {
+    nameEl.textContent = "✅ " + this.files[0].name;
+  } else {
+    nameEl.textContent = "";
+  }
+});
+
+// Form submit
 const form = document.getElementById("contactForm");
 const successMessage = document.getElementById("successMessage");
 const loading = document.getElementById("loading");
+const submitBtn = document.getElementById("submitBtn");
 
-form.addEventListener("submit", function(){
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    loading.style.display = "block";
+  // Validate file
+  const fileInput = document.getElementById("fileInput");
+  if (!fileInput.files || fileInput.files.length === 0) {
+    alert("⚠️ برجاء رفع صورة التحويل أولاً");
+    return;
+  }
 
-    setTimeout(() => {
+  // Show loading
+  submitBtn.disabled = true;
+  loading.style.display = "flex";
 
-        loading.style.display = "none";
+  const formData = new FormData(form);
 
-        successMessage.style.display = "block";
+  try {
 
-        form.style.display = "none";
+    // Use the standard (non-AJAX) endpoint to support file uploads
+    const response = await fetch(
+      "https://formsubmit.co/n15294327@gmail.com",
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json"
+        }
+      }
+    );
 
-    }, 2000);
+    loading.style.display = "none";
+
+    if (response.ok) {
+      form.style.display = "none";
+      successMessage.style.display = "flex";
+    } else {
+      submitBtn.disabled = false;
+      alert("❌ حدث خطأ أثناء الإرسال، حاول مرة أخرى");
+    }
+
+  } catch (error) {
+    loading.style.display = "none";
+    submitBtn.disabled = false;
+    alert("❌ فشل الاتصال بالسيرفر، تحقق من الإنترنت وحاول مرة أخرى");
+  }
 
 });
 
